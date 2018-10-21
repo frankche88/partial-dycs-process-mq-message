@@ -25,6 +25,13 @@ jar {
   }
 }
 
+shadowJar {
+  baseName = 'service'
+  classifier = null
+  version = null
+
+}
+
 //mainClassName = 'pe.edu.unmsm.dycs.rabbitmq.Worker'
 
 dependencies {

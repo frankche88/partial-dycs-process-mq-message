@@ -1,17 +1,25 @@
-# rabbitmq-java
-ejecutar
+# process-order-message
+#ejecutar en  local
 
 ./gradlew build shadowJar
 
-export MQ_URL=${MQ_URL_DE_PIVOTAL}
+export AMQ_URL=amqp://bzizimsp:LKVNczGhhTNTsk-CxeLgdE7MAFt_8Nbq@chimpanzee.rmq.cloudamqp.com/bzizimsp
 
- java -jar build/libs/rabbitmq-java-all.jar
+export AMQ_QUEUE=order.procesed
+
+java -jar build/libs/service.jar
  
  
- -- subir a pivotal
- cf push --no-start
- 
- cf set-env rabbitmq-java MQ_URL ${MQ_URL_DE_PIVOTAL}
+# subir a pivotal
+cf login -a https://api.run.pivotal.io
+
+cf push --no-start
+
+cf set-env process-order-message AMQ_URL amqp://bzizimsp:LKVNczGhhTNTsk-CxeLgdE7MAFt_8Nbq@chimpanzee.rmq.cloudamqp.com/bzizimsp
+
+cf set-env process-order-message AMQ_QUEUE order.procesed
+
 ###Variable optenida de pivotal
 
-cf rabbitmq-java --start
+cf start process-order-message
+
